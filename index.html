@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Lamb Investiture — Program 🐑</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <nav class="topbar">
+      <div class="brand">🐑 Little Lamb · Investiture Program</div>
+      <button data-view="program" class="active">▶️ Run of Show</button>
+    </nav>
+    <main class="view" id="main"></main>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="close" id="lightbox-close">✕</button>
+    <button class="nav prev" id="lightbox-prev">‹</button>
+    <div id="lightbox-content"></div>
+    <button class="nav next" id="lightbox-next">›</button>
+  </div>
+
+  <!-- Audience fullscreen overlay -->
+  <div id="audience-overlay"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

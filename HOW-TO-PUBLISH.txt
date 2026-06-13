@@ -1,0 +1,29 @@
+HOW TO GET A SHAREABLE LINK (open from any phone or computer)
+=============================================================
+
+This folder ("investiture-program") is the whole investiture program — the
+6 slides, all photos, the music videos, and the "Oh What a Miracle" video —
+bundled together. Nothing else is needed.
+
+EASIEST WAY — Netlify Drop (free, no account needed, ~2 minutes)
+----------------------------------------------------------------
+1. Open your web browser and go to:   https://app.netlify.com/drop
+2. Open this "investiture-program" folder in your file explorer.
+3. Drag the WHOLE folder onto the Netlify Drop page ("Drag and drop your site").
+4. Wait for the upload (it's ~168 MB, so give it a minute on good wifi).
+5. Netlify shows you a link like  https://random-name-12345.netlify.app
+   -> That is your shareable link. Open it on any phone or computer.
+
+To make the link nicer or update it later:
+- Click "Claim this site" / sign up free with Google — keeps the link permanent.
+- In Site settings you can rename it, e.g.  little-lamb-investiture.netlify.app
+- To update after a change: drag the folder onto the same site's "Deploys" page.
+
+USING THE PROGRAM
+-----------------
+- It opens on the "Run of Show" (Step 1). Use Next / Prev or the sidebar.
+- Press F (or "Show Audience") for big full-screen mode for the projector.
+- Step 2 plays the year slideshow; Step 4 the music videos; Step 5 the song video.
+
+Tip: on the projector, click into the page once first so the browser allows
+the video/music to play with sound.
