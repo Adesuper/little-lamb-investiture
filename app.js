@@ -496,7 +496,7 @@ function renderScreen(show, big) {
     const verseSessions = ids.map(id => SESSIONS.find(s => s.id === id)).filter(Boolean);
     return `
       <div class="verses-display ${big ? 'big' : ''}">
-        <h2>📖 What They Learned This Year</h2>
+        <h2>📖 Some of the Things We Learned This Year</h2>
         <div class="vd-grid">
           ${verseSessions.map(s => {
             const verseText = s.verse.split(" — ")[0].replace(/^"|"$/g, "");
@@ -988,5 +988,8 @@ function init() {
   BGM.init();
   renderBgmWidget();
   render();
+  // On the published/standalone build (body[data-autoaudience]), open straight into
+  // the big audience view. Press Esc (or the ✕ button) to drop back to the control pages.
+  if (document.body.dataset.autoaudience) openAudience();
 }
 document.addEventListener("DOMContentLoaded", init);

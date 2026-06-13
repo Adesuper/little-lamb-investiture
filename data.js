@@ -301,7 +301,7 @@ const PROGRAM = [
     id: 3,
     time: "4:00",
     durationSec: 150,
-    title: "What They Learned — Verses (One Per Child)",
+    title: "Some Things We Learned — Verses (One Per Child)",
     who: "Children recite one by one",
     script: "These children hid God's Word in their hearts this year. Let them share what they learned. Each child has one short verse.",
     kidsAction: "Each of the 6 children steps forward in turn and says their assigned verse (shown on screen). Audience applauds after each child.",
