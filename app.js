@@ -546,10 +546,13 @@ function renderScreen(show, big) {
   if (show.type === "video") {
     // Embedded finished video (e.g. the produced "Oh What a Miracle I Am" film).
     // Captions are baked into the video, so this is the full audience-ready piece.
+    // IMPORTANT: only ONE copy may make sound. The audience (big) layer is the real
+    // player (autoplay + sound); the small presenter preview underneath is muted and
+    // never autoplays — otherwise both play at once and you hear two overlapping audios.
     return `
       <div class="screen-video ${big ? 'big' : ''}">
         ${show.title ? `<div class="screen-video-title">🎵 ${show.title}</div>` : ""}
-        <video src="${show.src}" controls autoplay playsinline preload="metadata"></video>
+        <video src="${show.src}" controls playsinline preload="metadata"${big ? " autoplay" : " muted"}></video>
       </div>`;
   }
   if (show.type === "song-parts-stage") {
@@ -829,7 +832,10 @@ function closeAudience() {
   audienceMode = false;
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   const el = document.getElementById("audience-overlay");
-  if (el) el.classList.remove("active");
+  if (el) {
+    el.classList.remove("active");
+    el.innerHTML = "";  // remove the audience video/audio so it stops singing in the background
+  }
 }
 function renderAudience() {
   const step = PROGRAM[currentStepIndex];
