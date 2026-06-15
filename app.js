@@ -515,14 +515,13 @@ function renderScreen(show, big) {
     `;
   }
   if (show.type === "music-videos") {
-    // Kids' instrument videos in sequence. Xylophone ends as the closing highlight.
-    // video3 removed — looked repetitive.
+    // Kids' instrument videos in sequence. video3 removed — looked repetitive.
+    // xylophone-child removed — it ran 39s, too long for this segment.
     const videos = [
       { src: "musicvideo1.mp4", caption: "Our music time" },
       { src: "video2.mp4", caption: "Our music time" },
       { src: "video4.mp4", caption: "Our music time" },
-      { src: "video5.mp4", caption: "Our music time" },
-      { src: "xylophone-child.mp4", caption: "Xylophone — making music for Jesus" }
+      { src: "video5.mp4", caption: "Our music time" }
     ];
     return renderCarousel(videos, big);
   }
@@ -623,7 +622,7 @@ function renderCarousel(photos, big) {
     <div class="carousel ${big ? 'big' : ''}" data-photos='${JSON.stringify(photos).replace(/'/g, "&#39;")}'>
       <button class="car-nav prev" data-car="prev">‹</button>
       ${isVideo
-        ? `<video src="${cur.src}" autoplay playsinline controls></video>`
+        ? `<video src="${cur.src}" autoplay playsinline controls ${big ? "" : "muted"}></video>`
         : `<img src="${cur.src}" alt="" class="kenburns">`}
       <button class="car-nav next" data-car="next">›</button>
       <div class="caption">${cur.caption || ""} &nbsp;•&nbsp; ${carouselIndex + 1}/${photos.length}</div>
@@ -698,9 +697,12 @@ function onStepRendered() {
     const photos = JSON.parse(car.dataset.photos.replace(/&#39;/g, "'"));
     if (!carouselTimer) startCarousel(photos);
 
-    // When a video finishes, auto-advance to the next item
+    // When a video finishes, auto-advance to the next item — but only the VISIBLE
+    // layer drives it, so the muted hidden copy can't trigger a second skip.
     car.querySelectorAll("video").forEach(v => {
       v.addEventListener("ended", () => {
+        const inAud = !!v.closest("#audience-screen");
+        if ((audienceMode ? !inAud : inAud)) return;  // ignore the non-visible layer
         stopCarousel();
         carouselIndex = (carouselIndex + 1) % photos.length;
         refreshScreens();
@@ -734,9 +736,11 @@ function refreshScreens() {
   document.querySelectorAll(".carousel").forEach(car => {
     const photos = JSON.parse(car.dataset.photos.replace(/&#39;/g, "'"));
 
-    // Re-bind video autoplay + ended-listener after re-render
+    // Re-bind video autoplay + ended-listener after re-render (visible layer drives advance)
     car.querySelectorAll("video").forEach(v => {
       v.addEventListener("ended", () => {
+        const inAud = !!v.closest("#audience-screen");
+        if ((audienceMode ? !inAud : inAud)) return;  // ignore the non-visible layer
         stopCarousel();
         carouselIndex = (carouselIndex + 1) % photos.length;
         refreshScreens();
