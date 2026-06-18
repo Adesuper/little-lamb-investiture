@@ -1359,8 +1359,8 @@ main.view {
 }
 .audience-screen .verses-display.big .vd-play {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
-  padding: 12px 14px;
-  margin-top: 14px;
+  padding: 10px 14px;
+  margin-top: 8px;
 }
 
 /* ---------- Absent-child verse clip overlay (above projector view) ---------- */
@@ -1404,29 +1404,32 @@ main.view {
 .audience-screen .verses-display.big {
   width: 100%;
   max-width: 100%;
-  padding: 24px;
+  max-height: 90vh;        /* never taller than the screen... */
+  overflow-y: auto;        /* ...and if it is, the presenter can scroll to every ▶ */
+  padding: 16px;
   text-align: center;
 }
 .audience-screen .verses-display.big h2 {
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
   color: #ffd84d;
-  margin-bottom: 30px;
+  margin-bottom: 14px;
   text-shadow: 0 4px 14px rgba(0,0,0,0.5);
   font-weight: 900;
 }
 .audience-screen .verses-display.big .vd-grid {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  max-width: 1500px;
+  grid-template-columns: repeat(3, 1fr);   /* 6 cards => tidy 3 x 2 */
+  align-content: start;
+  gap: 14px;
+  max-width: 1300px;
 }
 .audience-screen .verses-display.big .vd-card {
   background: rgba(255, 255, 255, 0.96);
   border-width: 4px;
-  padding: 20px 18px;
+  padding: 14px 16px;
 }
 .audience-screen .verses-display.big .vd-emoji {
-  font-size: 2.6rem;
-  margin-bottom: 8px;
+  font-size: 2rem;
+  margin-bottom: 4px;
 }
 .audience-screen .verses-display.big .vd-verse {
   font-size: clamp(1.1rem, 1.6vw, 1.4rem);
@@ -1437,8 +1440,8 @@ main.view {
 }
 .audience-screen .verses-display.big .vd-kidsline {
   font-size: clamp(1rem, 1.4vw, 1.25rem);
-  padding: 10px 14px;
-  margin-top: 14px;
+  padding: 8px 14px;
+  margin-top: 8px;
 }
 
 @media (max-width: 1100px) {
