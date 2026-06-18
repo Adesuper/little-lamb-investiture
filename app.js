@@ -504,9 +504,11 @@ function renderScreen(show, big) {
             return `
               <div class="vd-card" style="border-color: ${s.pillarColor}; background: linear-gradient(180deg, #fff, ${s.pillarColor}22);">
                 <div class="vd-emoji">${pillarEmoji(s.pillar)}</div>
+                ${s.child ? `<div class="vd-child">${s.child}</div>` : ""}
                 <div class="vd-verse">"${verseText}"</div>
                 <div class="vd-ref">— ${verseRef}</div>
                 <div class="vd-kidsline">"${s.kidsLine}"</div>
+                ${s.verseClip ? `<button class="vd-play" data-verseclip="${s.verseClip}" data-child="${s.child || ""}">▶ Play ${s.child || "verse"}'s clip</button>` : ""}
               </div>
             `;
           }).join("")}
@@ -945,8 +947,57 @@ function lightboxNext(dir) {
   showLightbox();
 }
 
+// ---------- Verse clip overlay (for absent children on Slide 3) ----------
+// Plays a single child's pre-recorded verse clip full-screen, ABOVE the projector
+// (audience) overlay. Used only when a child is absent — the presenter taps ▶ on
+// that child's card and the clip plays with sound, then they carry on live.
+function playVerseClip(src, child) {
+  if (!src) return;
+  const overlay = document.getElementById("verse-overlay");
+  if (!overlay) return;
+  // In projector mode the #audience-overlay is the fullscreen element, so a sibling
+  // overlay would be invisible. Mount inside the current fullscreen element if there is one.
+  const host = document.fullscreenElement || document.body;
+  if (overlay.parentElement !== host) host.appendChild(overlay);
+  overlay.innerHTML = `
+    <button class="verse-overlay-close" id="verse-overlay-close" title="Close (Esc)">✕</button>
+    <video id="verse-overlay-video" src="${src}" autoplay playsinline controls></video>
+  `;
+  overlay.classList.add("active");
+  const close = () => closeVerseClip();
+  document.getElementById("verse-overlay-close").addEventListener("click", close);
+  overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
+  const vid = document.getElementById("verse-overlay-video");
+  // When the clip finishes, close automatically so we return to the verse grid.
+  vid.addEventListener("ended", close);
+  vid.play().catch(() => {});
+}
+function closeVerseClip() {
+  const overlay = document.getElementById("verse-overlay");
+  if (!overlay) return;
+  overlay.classList.remove("active");
+  overlay.innerHTML = "";  // stops audio
+}
+function verseClipOpen() {
+  const o = document.getElementById("verse-overlay");
+  return o && o.classList.contains("active");
+}
+// Delegated so it works in both the normal view and the fullscreen projector layer.
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".vd-play");
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    playVerseClip(btn.dataset.verseclip, btn.dataset.child);
+  }
+});
+
 // ---------- Keyboard ----------
 document.addEventListener("keydown", e => {
+  if (verseClipOpen()) {
+    if (e.key === "Escape") closeVerseClip();
+    return;
+  }
   const lb = document.getElementById("lightbox");
   if (lb.classList.contains("active")) {
     if (e.key === "Escape") hideLightbox();

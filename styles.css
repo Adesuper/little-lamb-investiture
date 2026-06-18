@@ -1330,6 +1330,75 @@ main.view {
   color: #713f12;
   font-weight: 700;
 }
+/* Child's name on each verse card */
+.vd-child {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #4c1d95;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+/* ▶ Play button — only shows on cards that have a recorded clip (for absent kids) */
+.vd-play {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #a78bfa;
+  background: #4c1d95;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.vd-play:hover { background: #6d28d9; }
+.vd-play:active { transform: scale(0.97); }
+.audience-screen .verses-display.big .vd-child {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+}
+.audience-screen .verses-display.big .vd-play {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+
+/* ---------- Absent-child verse clip overlay (above projector view) ---------- */
+#verse-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;            /* above #audience-overlay (9999) */
+  background: rgba(8, 6, 20, 0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+#verse-overlay.active { display: flex; }
+#verse-overlay video {
+  max-width: 96vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+  background: #000;
+}
+.verse-overlay-close {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+  font-size: 1.7rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.verse-overlay-close:hover { background: rgba(255,255,255,0.3); }
 
 /* Audience-view (fullscreen) — BIG for the back of the room */
 .audience-screen .verses-display.big {

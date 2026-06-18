@@ -17,6 +17,8 @@ const SESSIONS = [
     pillarColor: "#7ec4ff",
     activity: "Paper-plate sheep craft with cotton balls",
     verse: "The Lord is my Shepherd. — Psalm 23:1",
+    child: "Raphael",
+    verseClip: "verse-clips/raphael.mp4",
     kidsLine: "Jesus is my Shepherd!",
     photos: [
       F3 + "20251101_162050.jpg",
@@ -68,6 +70,8 @@ const SESSIONS = [
     pillarColor: "#ffb84d",
     activity: "Paper-bag dolls with yarn hair & sequin faces",
     verse: "I am wonderfully made. — Psalm 139:14",
+    child: "Aleiah",
+    verseClip: "verse-clips/aleiah.mp4",
     kidsLine: "God made me special!",
     photos: [
       F2 + "20260124_155948.jpg",
@@ -85,6 +89,8 @@ const SESSIONS = [
     pillarColor: "#ff8fa3",
     activity: "Hands-on dough making — kneading together",
     verse: "I am the bread of life. — John 6:35",
+    child: "Amy Reyna",
+    verseClip: "verse-clips/amy-reyna.mp4",
     kidsLine: "We share like a family!",
     photos: [
       F2 + "20260207_155511.jpg",
@@ -101,6 +107,8 @@ const SESSIONS = [
     pillarColor: "#7ec4ff",
     activity: "Bubble science + paper-doll Bible characters",
     verse: "Love one another. — John 13:34",
+    child: "Bernice",
+    verseClip: "verse-clips/bernice.mp4",
     kidsLine: "I have Bible friends!",
     photos: [
       F1 + "20260307_155243.jpg",
@@ -117,6 +125,8 @@ const SESSIONS = [
     pillarColor: "#a78bfa",
     activity: "Star craft — God made the sky",
     verse: "He made the stars. — Genesis 1:16",
+    child: "Daris",
+    verseClip: "verse-clips/daris.mp4",
     kidsLine: "God made the stars!",
     photos: [
       F1 + "20260404_160359.jpg",   // NEW — colorful stars on the black board
@@ -135,6 +145,8 @@ const SESSIONS = [
     pillarColor: "#ff8fa3",
     activity: "Learning about firefighters, doctors, police, teachers",
     verse: "Be kind to one another. — Ephesians 4:32",
+    child: "Elizabeth",
+    verseClip: "verse-clips/elizabeth.mp4",
     kidsLine: "I help my community!",
     photos: [
       FM + "20260418_163232.jpg",   // NEW — the kids holding up their Community Helpers signs
