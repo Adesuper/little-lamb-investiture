@@ -640,15 +640,15 @@ function renderCarousel(photos, big) {
   `;
 }
 
-function onStepRendered() {
-  // Auto-pause BGM when entering the actual song slide
-  autoPauseBgmForSongSlide();
-
-  // Wire Slide 2 background music ("I Am a Little Lamb Today") — uses global BGM
+// Wire Slide 2 background music ("I Am a Little Lamb Today") — uses global BGM.
+// Must be re-called every time the slide is re-rendered (incl. each carousel tick,
+// which rebuilds these buttons via innerHTML), or the Play button loses its handler.
+function wireSlide2Music() {
   document.querySelectorAll(".slide2-music-controls").forEach(box => {
     const playBtn = box.querySelector(".slide2-music-btn");
     const stopBtn = box.querySelector(".slide2-music-stop");
-    if (!playBtn) return;
+    if (!playBtn || playBtn.dataset.wired) return;  // avoid double-binding
+    playBtn.dataset.wired = "1";
 
     const showPlay = () => { playBtn.style.display = ""; stopBtn.style.display = "none"; };
     const showStop = () => { playBtn.style.display = "none"; stopBtn.style.display = ""; };
@@ -660,6 +660,13 @@ function onStepRendered() {
     });
     stopBtn.addEventListener("click", () => { BGM.pause(); showPlay(); });
   });
+}
+
+function onStepRendered() {
+  // Auto-pause BGM when entering the actual song slide
+  autoPauseBgmForSongSlide();
+
+  wireSlide2Music();
 
   // Wire song-parts-stage audio (slide 5: visual song parts)
   document.querySelectorAll(".sps-audio").forEach(box => {
@@ -742,6 +749,8 @@ function refreshScreens() {
   if (preview) preview.innerHTML = renderScreen(step.show, false);
   const audience = document.getElementById("audience-screen");
   if (audience) audience.innerHTML = renderScreen(step.show, true);
+  // The innerHTML above rebuilt the Slide-2 music buttons — re-attach their handlers.
+  wireSlide2Music();
   // Re-wire carousels (no timer restart) and re-bind video handlers
   document.querySelectorAll(".carousel").forEach(car => {
     const photos = JSON.parse(car.dataset.photos.replace(/&#39;/g, "'"));
