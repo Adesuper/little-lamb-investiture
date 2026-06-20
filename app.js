@@ -474,7 +474,7 @@ function renderScreen(show, big) {
       photos.forEach(p => allPhotos.push({ src: p, caption: s.title }));
     });
     // Append plant photos (skipping music sheets and videos in s9) to land near 25 total.
-    const plantSources = ["./plant1.jpeg", "./plant2.jpeg", "./plant3.jpeg"];
+    const plantSources = ["./plants-collage.jpeg"];
     plantSources.forEach(p => allPhotos.push({ src: p, caption: "Our plants — caring for what God made" }));
 
     const playing = BGM.isPlaying();
