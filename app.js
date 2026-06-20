@@ -452,30 +452,36 @@ function renderScreen(show, big) {
     return renderCarousel(allPhotos, big);
   }
   if (show.type === "year-photos-combined") {
-    // Curated slideshow — representative photos per session (no duplicates).
-    // Skips videos and music sheets (those are on slide 4). Plant photos appended at end.
-    // Target: ~25 photos. Run length at 4.5s each = ~110 seconds, fits in slide 2's 3 min.
-    const SELECTION = [
-      { id: "s1", count: 3 },  // Sheep crafts — most varied
-      { id: "s2", count: 2 },  // More sheep
-      { id: "s3", count: 2 },  // God Loves Me stone
-      { id: "s4", count: 3 },  // Marvelous Me — "I Am Special" paper-bag dolls
-      { id: "s6", count: 2 },  // Bible friends + bubbles
-      { id: "s7", count: 4 },  // Star crafts — incl. the stars on the board
-      { id: "s5", count: 2 },  // Bread making
-      { id: "s8", count: 4 }   // Community helpers — incl. the group holding their signs
+    // Curated slideshow — ordered by the four Little Lamb pillars so the year
+    // flows the way the presenter narrates it: My God → Myself → My World → My Family.
+    // New photos (2026-06-20) folded into the right pillar; busy themes (birds, homes,
+    // plants) combined into one collage each to keep it tidy. 18 items, ~80s at 4.5s each.
+    // Uses the F1/F2/F3/FM/LF path constants (from data.js) so it works in BOTH the main
+    // site and the offline/standalone copy. Captions name the pillar to aid the narration.
+    const allPhotos = [
+      // ----- My God -----
+      { src: F3 + "20251101_162050.jpg", caption: "My God · Jesus is my Shepherd" },
+      { src: F3 + "20251101_162110.jpg", caption: "My God · I am a little lamb" },
+      { src: F3 + "20251115_161614.jpg", caption: "My God · Following the Shepherd" },
+      { src: F3 + "20260110_160714.jpg", caption: "My God · God loves me" },
+      { src: F1 + "20260307_155243.jpg", caption: "My God · I have Bible friends" },
+      // ----- Myself -----
+      { src: LF + "self.jpg",            caption: "Myself · I am wonderfully made" },
+      { src: F2 + "20260124_155948.jpg", caption: "Myself · Marvelous me" },
+      { src: F2 + "20260124_161155.jpg", caption: "Myself · God made me special" },
+      // ----- My World (nature) -----
+      { src: F1 + "20260404_160359.jpg", caption: "My World · God made the stars" },
+      { src: F1 + "20260404_165333.jpg", caption: "My World · God made the sky" },
+      { src: LF + "birds-collage.jpeg",  caption: "My World · God made the birds" },
+      { src: LF + "plants-collage.jpeg", caption: "My World · Caring for what God made" },
+      // ----- My Family -----
+      { src: LF + "homes-collage.jpeg",  caption: "My Family · Love lives here" },
+      { src: LF + "family.jpg",          caption: "My Family · God gave me my family" },
+      { src: F2 + "20260207_155511.jpg", caption: "My Family · We share like a family" },
+      { src: F2 + "20260207_155512.jpg", caption: "My Family · The Bread of Life" },
+      { src: FM + "20260418_163232.jpg", caption: "My Family · I help my community" },
+      { src: FM + "20260418_162936.jpg", caption: "My Family · Community helpers" }
     ];
-    const allPhotos = [];
-    SELECTION.forEach(sel => {
-      const s = SESSIONS.find(x => x.id === sel.id);
-      if (!s) return;
-      // Skip videos (.mp4) — only include photos
-      const photos = s.photos.filter(p => !p.toLowerCase().endsWith(".mp4")).slice(0, sel.count);
-      photos.forEach(p => allPhotos.push({ src: p, caption: s.title }));
-    });
-    // Append plant photos (skipping music sheets and videos in s9) to land near 25 total.
-    const plantSources = ["./plants-collage.jpeg"];
-    plantSources.forEach(p => allPhotos.push({ src: p, caption: "Our plants — caring for what God made" }));
 
     const playing = BGM.isPlaying();
     return `
