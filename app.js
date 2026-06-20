@@ -460,19 +460,21 @@ function renderScreen(show, big) {
     // site and the offline/standalone copy. Captions name the pillar to aid the narration.
     const allPhotos = [
       // ----- My God -----
-      { src: F3 + "20251101_162050.jpg", caption: "My God · Jesus is my Shepherd" },
-      { src: F3 + "20251101_162110.jpg", caption: "My God · I am a little lamb" },
-      { src: F3 + "20251115_161614.jpg", caption: "My God · Following the Shepherd" },
+      { src: F3 + "20251115_161836.jpg", caption: "My God · Jesus is my Shepherd" },
+      { src: F3 + "20251101_162050.jpg", caption: "My God · I am a little lamb" },
+      { src: F3 + "20251101_162110.jpg", caption: "My God · Following the Shepherd" },
+      { src: F3 + "20251115_161614.jpg", caption: "My God · His little lambs" },
       { src: F3 + "20260110_160714.jpg", caption: "My God · God loves me" },
       { src: F1 + "20260307_155243.jpg", caption: "My God · I have Bible friends" },
       // ----- Myself -----
       { src: LF + "self.jpg",            caption: "Myself · I am wonderfully made" },
       { src: F2 + "20260124_155948.jpg", caption: "Myself · Marvelous me" },
       { src: F2 + "20260124_161155.jpg", caption: "Myself · God made me special" },
+      { src: F1 + "20260404_165333.jpg", caption: "Myself · Marvelous Me — every part of me" },
       // ----- My World (nature) -----
-      { src: F1 + "20260404_160359.jpg", caption: "My World · God made the stars" },
-      { src: F1 + "20260404_165333.jpg", caption: "My World · God made the sky" },
-      { src: LF + "birds-collage.jpeg",  caption: "My World · God made the birds" },
+      { src: F1 + "20260404_154300.jpg", caption: "My World · God made the stars" },
+      { src: F1 + "20260404_160359.jpg", caption: "My World · God made the night sky" },
+      { src: LF + "birds-collage.jpeg",  caption: "My World · God made the animals" },
       { src: LF + "plants-collage.jpeg", caption: "My World · Caring for what God made" },
       // ----- My Family -----
       { src: LF + "homes-collage.jpeg",  caption: "My Family · Love lives here" },
